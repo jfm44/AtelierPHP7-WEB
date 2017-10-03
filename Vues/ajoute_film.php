@@ -8,6 +8,5 @@
     <input name="nomFilm"/>
     <br>
     <input type="submit" value="ajoute_film"/>   
-
 </FORM>
     

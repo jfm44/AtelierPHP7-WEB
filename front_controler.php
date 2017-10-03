@@ -14,8 +14,10 @@
     switch ($actionChoisie)
     {
         case "ajoute_film_post" : 
-        
-            break;
+            @$nomFilmRecu = $_REQUEST["nomFilm"];
+            $ensFilms[]=$nomFilmRecu;
+            header("Location: front_controler.php?action=liste_films");
+            exit;
         
         case "logout" :
             session_destroy();
