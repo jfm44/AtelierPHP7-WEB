@@ -1,6 +1,9 @@
 <?php
+    $titre = "Nouveau Site vachement bô";
+    session_start();
     static $ensFilms = ["Dracula","Kung fu Panda","Dora l'exploratrice"];
     static $maVue;
+    //static $adm = FALSE;
 /**
  * Le controleur ne contient pas de code de présentation
  * Uniquement du PHP
@@ -10,6 +13,48 @@
     
     switch ($actionChoisie)
     {
+        case "ajoute_film_post" : 
+        
+            break;
+        
+        case "logout" :
+            session_destroy();
+            $titre = "Nouveau Site vachement bô";
+            $maVue = "login";
+            header("Location: front_controler.php?action=login");
+            exit;
+        
+        case "login" :
+            $titre = "Login";
+            $maVue = "login";
+            break;
+        
+        case "login_post" :
+            // retour de login  
+            @$loginRecu = $_REQUEST["login"];
+            @$mdpRecu = $_REQUEST["mdp"];
+            if (($loginRecu == "admin") && ($mdpRecu == "admin"))              
+            {
+                // OK             
+                $_SESSION["login"] = TRUE;
+                $_SESSION["admin"] = TRUE;
+                $_SESSION["nom"] = $loginRecu;
+                //Redirection sur la page de liste des films 
+                // on dit au navigateur d'envoyer un requet GET liste_films
+                header("Location: front_controler.php?action=liste_films");
+                exit;
+            }
+            else
+            {
+                //KO
+                $_SESSION["login"] = TRUE;
+                $_SESSION["admin"] = FALSE;
+                $_SESSION["nom"] = $loginRecu;
+                $titre = "Login";
+                $maVue = "login";                
+            }
+            
+            
         case "liste_films" :
             // les films sonts dans la variable ensFilms
             //$ensFilms
@@ -21,8 +66,12 @@
         
         case "liste_series" :
             break;
+        
         case "ajoute_film" :
+            $titre = "Ajoout Film";
+            $maVue = "ajoute_film";
             break;
+        
         case "ajoute_serie" :
             break;
         case "supprime_film" :
@@ -31,7 +80,10 @@
             break;
         default :
             echo "erreur action inconnue";
-            exit();
+            $titre = "Login";
+            $maVue = "login";
+            break;
+            //exit();
     }
    
     //Afficher la page
