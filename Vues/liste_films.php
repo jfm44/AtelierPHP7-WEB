@@ -4,6 +4,7 @@
         if ($testAdm == True) 
         {
             printf("<a href=\"front_controler.php?action=ajoute_film\"><INPUT TYPE=\"submit\" NAME=\"btAjouter\" VALUE=\"Ajouter un Film\"></a>");
+            printf("<a href=\"front_controler.php?action=cree_tables\"><INPUT TYPE=\"submit\" NAME=\"btCreerBase\" VALUE=\"Creer tables\"></a>");
         }
     }
     else 
@@ -24,8 +25,10 @@
             {
                 For($i=0;$i<count($ensFilms);$i++)
                 { 
-                    printf("<TR><TD> %d - %s </TD> <TD>");
-                    printf("<INPUT TYPE=\"submit\" NAME=\"btSupprimer\" VALUE=\"Supprimer\"></TD></TR>",$i+1,$ensFilms[$i]);
+                    printf("<TR><TD>");
+                    printf("%d - %s </TD> <TD>",$i+1,$ensFilms[$i]);
+                    printf("<a href=\"front_controler.php?action=supprime_film&titre=%s\"><INPUT TYPE=\"submit\" NAME=\"btSupprimer\" VALUE=\"Supprimer\"></a></TD></TR>",$ensFilms[$i]);
+                    //<INPUT TYPE=\"submit\" NAME=\"btSupprimer\" VALUE=\"Supprimer\"></TD></TR>",
                 }
             }
             else

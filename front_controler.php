@@ -1,4 +1,7 @@
 <?php
+    include './lib/lib_db.php';
+    
+       
     $titre = "Nouveau Site vachement bô";
     session_start();
     static $initEnsFilms = ["Dracula","Kung fu Panda","Dora l'exploratrice"];
@@ -11,15 +14,18 @@
 // recupération d'un paramètre de l'url
     @$actionChoisie = $_REQUEST["action"];
     
+    
     switch ($actionChoisie)
     {
+        case "cree_tables" :
+            creatTabUsers();
+            creatTabFilms();
+            break;
+            
         case "ajoute_film_post" : 
             @$nomFilmRecu = $_REQUEST["nomFilm"];
-            //$ensFilms = $_SESSION["tabFilms"];
-            //echo $nomFilmRecu;
-            //$ensFilms[]=$nomFilmRecu;
-            //$_SESSION["tabFilms"] = $ensFilms;
-            $_SESSION["tabFilms"][] = $nomFilmRecu;
+            //$_SESSION["tabFilms"][] = $nomFilmRecu;
+            stockFilm($nomFilmRecu);
             header("Location: front_controler.php?action=liste_films");
             exit();
         
@@ -67,7 +73,7 @@
             // les films sonts dans la variable ensFilms si on est connecté
             if (isset($_SESSION["login"]))
             {
-                $ensFilms = $_SESSION["tabFilms"];
+                $ensFilms = lister_Films();
             }    
             //include './liste_films.php';
             $titre = "Films";
@@ -84,8 +90,13 @@
         
         case "ajoute_serie" :
             break;
+        
         case "supprime_film" :
-            break;
+            @$titeASupprimer = $_REQUEST["titre"];
+            delFilm($titeASupprimer);
+            header("Location: front_controler.php?action=liste_films");
+            exit();
+        
         case "supprime_serie" :
             break;
         default :
