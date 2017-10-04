@@ -1,7 +1,7 @@
 <?php
     $titre = "Nouveau Site vachement bô";
     session_start();
-    
+    static $initEnsFilms = ["Dracula","Kung fu Panda","Dora l'exploratrice"];
     static $maVue;
     //static $adm = FALSE;
 /**
@@ -15,8 +15,11 @@
     {
         case "ajoute_film_post" : 
             @$nomFilmRecu = $_REQUEST["nomFilm"];
-            echo $nomFilmRecu;
-            $ensFilms[]=$nomFilmRecu;
+            //$ensFilms = $_SESSION["tabFilms"];
+            //echo $nomFilmRecu;
+            //$ensFilms[]=$nomFilmRecu;
+            //$_SESSION["tabFilms"] = $ensFilms;
+            $_SESSION["tabFilms"][] = $nomFilmRecu;
             header("Location: front_controler.php?action=liste_films");
             exit();
         
@@ -42,6 +45,7 @@
                 $_SESSION["login"] = TRUE;
                 $_SESSION["admin"] = TRUE;
                 $_SESSION["nom"] = $loginRecu;
+                $_SESSION["tabFilms"] = $initEnsFilms;
                 //Redirection sur la page de liste des films 
                 // on dit au navigateur d'envoyer un requet GET liste_films
                 header("Location: front_controler.php?action=liste_films");
@@ -53,15 +57,18 @@
                 $_SESSION["login"] = TRUE;
                 $_SESSION["admin"] = FALSE;
                 $_SESSION["nom"] = $loginRecu;
+                $_SESSION["tabFilms"] = $initEnsFilms;
                 $titre = "Login";
                 $maVue = "login";                
             }
             
             
         case "liste_films" :
-            // les films sonts dans la variable ensFilms
-            //$ensFilms
-            // Envoyer les films à la vue (page)
+            // les films sonts dans la variable ensFilms si on est connecté
+            if (isset($_SESSION["login"]))
+            {
+                $ensFilms = $_SESSION["tabFilms"];
+            }    
             //include './liste_films.php';
             $titre = "Films";
             $maVue = "liste_films";
