@@ -7,6 +7,7 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
+        <STYLE type="text/css"> @import url(./theme/assets/css/style.css) </STYLE>
         <?php
             include './Presentation/entetePage.php';
         ?>

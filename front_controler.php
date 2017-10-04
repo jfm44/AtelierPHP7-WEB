@@ -1,7 +1,7 @@
 <?php
     $titre = "Nouveau Site vachement bô";
     session_start();
-    static $ensFilms = ["Dracula","Kung fu Panda","Dora l'exploratrice"];
+    
     static $maVue;
     //static $adm = FALSE;
 /**
@@ -15,9 +15,10 @@
     {
         case "ajoute_film_post" : 
             @$nomFilmRecu = $_REQUEST["nomFilm"];
+            echo $nomFilmRecu;
             $ensFilms[]=$nomFilmRecu;
             header("Location: front_controler.php?action=liste_films");
-            exit;
+            exit();
         
         case "logout" :
             session_destroy();
