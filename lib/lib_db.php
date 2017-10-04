@@ -52,7 +52,6 @@ function creatTabFilms()
 {
     //echo "Debut creatTabFilms" . "<br>";
     try {
-        
         $pdo = new PDO(CHAINE_DE_CONNEXION, DB_USER);
     } catch (Exception $ex) {
         //echo $ex->getMessage();
@@ -77,11 +76,11 @@ function lister_Films()
     
     $statement = $pdo->query("SELECT * From tabfilms ORDER BY titre");
     
-    foreach ($statement->fetchAll() as $lefilm) 
-    {
-        $res[] = $lefilm["titre"];
-    }
-    return $res;
+//    foreach ($statement->fetchAll() as $lefilm) 
+//    {
+//        $res[] = $lefilm["titre"];
+//    }
+    return $statement->fetchAll();
 }
 
 function stockFilm($titre)
@@ -113,3 +112,5 @@ function delFilm($titre)
     $pdo->commit();
     
 }
+
+$creatTabFilms = creatTabFilms();
