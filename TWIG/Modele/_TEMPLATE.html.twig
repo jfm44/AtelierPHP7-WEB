@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% include 'Modele/_ENTETE.html.twig' %}
+    <body> 
+        <section id="container" >
+            <!-- **********************************************************************************************************************************************************
+            Barre du Haut
+            *********************************************************************************************************************************************************** -->
+            {% block menu %}
+                {% include 'Modele/_HEADER.html.twig' %}
+            {% endblock %}
+            <!-- **********************************************************************************************************************************************************
+            {% block sidebarr %}
+                {% include 'Modele/_SIDEBARR.html.twig' %}
+            {% endblock %}
+
+            <!-- MAIN CONTENT
+            *********************************************************************************************************************************************************** -->
+            {{ Utilisateur }}
+            <!--main content start-->
+            <section id="main-content">
+                <section class="wrapper">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="content-panel">
+                                {% block contenu %}
+                                    *** CONTENU PAR DEFAUT ***
+                                {% endblock %}
+                            </div><! --/content-panel -->
+                        </div><!-- /col-md-12 -->
+                    </div>
+                </section>                
+            </section><!-- /MAIN CONTENT -->
+            <!--main content end-->
+            {% block pied %}
+                {% include 'Modele/_PIED.html.twig' %}
+            {% endblock %}
+
+        </section>
+        {% include 'Modele/_SCRIPT1.html.twig' %}
+    </body>
+</html>

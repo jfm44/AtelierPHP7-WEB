@@ -1,0 +1,24 @@
+<html>
+    {% include 'Modele/_ENTETE.html.twig' %}
+   
+    <body>
+        <section id="container" >
+            {% block menu %}
+                {% include 'Modele/_HEADER.html.twig' %}
+            {% endblock %}
+            
+            <section id="main-content">    
+            {% block contenu %}
+                *** CONTENU PAR DEFAUT ****
+            {% endblock %}
+            </section>
+            
+            {% block pied %}
+                {% include 'Modele/_PIED.html.twig' %}
+            {% endblock %}       
+         </section>
+        {% block script %}
+            {% include 'Modele/_SCRIPT1.html.twig' %}
+        {% endblock %}       
+    </body>    
+</html>

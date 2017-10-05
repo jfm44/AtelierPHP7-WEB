@@ -9,7 +9,10 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <STYLE type="text/css"> @import url(./theme/assets/css/style.css) </STYLE>
         <?php
-            include './Presentation/entetePage.php';
+            if ($maVue != "login")
+            {        
+                include './Presentation/entetePage.php';
+            }
         ?>
     </head>
     <body>

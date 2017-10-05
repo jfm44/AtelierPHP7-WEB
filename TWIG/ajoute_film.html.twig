@@ -1,0 +1,15 @@
+{% extends "Modele/_TEMPLATE.html.twig" %}
+
+{% block contenu %}
+    <form class="form-login" method="POST" action="front_controler.php?action=ajoute_film_post">
+        <div >
+                <label> Nom du film </label> <input name="nomFilm"/>
+                <br>
+                <label> Nom du realisateur </label> <input name="nomReal"/>
+                <br>
+                <label> Anne de sortie </label> <input name="anneeS"/>
+                <br>
+                <button class="btn btn-theme btn-block" type="submit"><i class="fa fa-lock"></i> Enregistrer</button>
+                <hr>	            		
+        </div>    
+{% endblock %}

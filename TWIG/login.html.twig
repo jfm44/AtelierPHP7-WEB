@@ -1,0 +1,16 @@
+{% extends "Modele/_TEMPLATE.html.twig" %}
+
+{% block contenu %}
+    <form class="form-login" method="POST" action="front_controler.php?action=login_post" >
+        <h2 class="form-login-heading">Connectez-vous</h2>
+        <div class="login-wrap">
+            <input type="text" name="login" value="" class="form-control" placeholder="User ID" autofocus>
+            <br>
+            <input type="password" name="mdp" value="" class="form-control" placeholder="Password">
+            <br>
+            <button class="btn btn-theme btn-block" type="submit"><i class="fa fa-lock"></i> SIGN IN</button>
+            <hr>	            		
+        </div>
+
+      </form>	  	
+{% endblock %}

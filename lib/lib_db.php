@@ -5,9 +5,13 @@
 
 function initTabFilms()
 {
-    //echo "Debut initTabFilms" . "<br>";
+    echo "Debut initTabFilms" . "<br>";
     
-    static $initEnsFilms = ["Dracula","Kung fu Panda","Dora l'exploratrice"];    
+    static $initEnsFilms = [
+                    ["titre" => "Dracula", "realisateur" => "Francis Fiord Copola","annee" => 1993],
+                    ["titre" => "Kung fu Panda", "realisateur" => "Mark Osborne","annee" => 2008],
+                    ["titre" => "La guerre des mondes", "realisateur" => "Steven Spielberg",  "annee" => 2005]
+                            ];    
     try {
         $pdo = new PDO(CHAINE_DE_CONNEXION, DB_USER);
     } catch (Exception $ex) {
@@ -19,13 +23,15 @@ function initTabFilms()
     //echo "<br>" . "Debut foreach";
     
     foreach ($initEnsFilms as $value) {
-       //echo '<br>Debut transaction pour insertion >' . $value . '<';
+      echo '<br>Debut transaction pour insertion >' . $value["titre"] . '<';
        $pdo->beginTransaction();
-       $Statement = $pdo->prepare("INSERT INTO tabfilms (titre) VALUES (:montitre)");  
-       $Statement->bindValue("montitre", $value);
-       //echo '========== execute <br>';
+       $Statement = $pdo->prepare("INSERT INTO tabfilms (titre,realisateur,annee) VALUES (:monTitre,:monRealisateur,:monAnnee)");  
+       $Statement->bindValue("monTitre", $value["titre"]);
+       $Statement->bindValue("monRealisateur", $value["realisateur"]);
+       $Statement->bindValue("monAnnee", $value["annee"]);
+       echo '<br>========== execute';
        $Statement->execute();
-       //echo '========== commit <br>';
+       echo '<br>========== commit <br>';
        $pdo->commit();
     }    
 }
@@ -61,7 +67,7 @@ function creatTabFilms()
      * CREATE TABLE `basetest`.`tab` ( `id` INT NOT NULL AUTO_INCREMENT , `login` VARCHAR(12) NOT NULL , `mdp` VARCHAR(12) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
      */
     
-    $ret = $pdo->exec("CREATE TABLE tabfilms ( id BIGINT NOT NULL AUTO_INCREMENT , titre VARCHAR(32) NOT NULL , PRIMARY KEY (id)) ENGINE = InnoDB");
+    $ret = $pdo->exec("CREATE TABLE tabfilms ( id BIGINT NOT NULL AUTO_INCREMENT , titre VARCHAR(32) NOT NULL ,  realisateur VARCHAR(32) NOT NULL, annee INT NOT NULL, PRIMARY KEY (id)) ENGINE = InnoDB");
     //echo "<br>" . " Ret >" . $ret . "<";
         
     initTabFilms();
@@ -113,4 +119,4 @@ function delFilm($titre)
     
 }
 
-$creatTabFilms = creatTabFilms();
+//$creatTabFilms = creatTabFilms();

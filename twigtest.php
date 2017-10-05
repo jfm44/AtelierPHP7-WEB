@@ -11,4 +11,5 @@
     $twig = new Twig_Environment($loader);
 
     // Afficher 
-echo $twig->load('liste_films.html.twig')->render( ["films"=> lister_Films()] );
+echo $twig->load('Modele/_TEMPLATE.html.twig')->render( ["films"=> lister_Films(), "Utilisateur" => "Monsieur TEST"]);
+//echo $twig->load('liste_films_NEW.html.twig')->render( ["films"=> lister_Films()] );
